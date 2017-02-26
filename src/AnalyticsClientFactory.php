@@ -8,7 +8,7 @@ use Illuminate\Contracts\Cache\Repository;
 
 class AnalyticsClientFactory
 {
-    public static function createForConfig(array $analyticsConfig): AnalyticsClient
+    public static function createForConfig(array $analyticsConfig)
     {
         $authenticatedClient = self::createAuthenticatedGoogleClient($analyticsConfig);
 
@@ -17,14 +17,14 @@ class AnalyticsClientFactory
         return self::createAnalyticsClient($analyticsConfig, $googleService);
     }
 
-    public static function createAuthenticatedGoogleClient(array $config): Google_Client
+    public static function createAuthenticatedGoogleClient(array $config)
     {
         $client = new Google_Client();
 
         $client->setClassConfig(
             'Google_Cache_File',
             'directory',
-            $config['cache_location'] ?? storage_path('app/laravel-google-analytics/google-cache/')
+            $config['cache_location'] ? $config['cache_location'] : storage_path('app/laravel-google-analytics/google-cache/')
         );
 
         $credentials = $client->loadServiceAccountJson(
@@ -37,7 +37,7 @@ class AnalyticsClientFactory
         return $client;
     }
 
-    protected static function createAnalyticsClient(array $analyticsConfig, Google_Service_Analytics $googleService): AnalyticsClient
+    protected static function createAnalyticsClient(array $analyticsConfig, Google_Service_Analytics $googleService)
     {
         $client = new AnalyticsClient($googleService, app(Repository::class));
 

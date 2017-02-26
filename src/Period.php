@@ -14,12 +14,12 @@ class Period
     /** @var \DateTime */
     public $endDate;
 
-    public static function create(DateTime $startDate, $endDate): Period
+    public static function create(DateTime $startDate, $endDate)
     {
         return new static($startDate, $endDate);
     }
 
-    public static function days(int $numberOfDays): Period
+    public static function days(int $numberOfDays)
     {
         $endDate = Carbon::today();
 
