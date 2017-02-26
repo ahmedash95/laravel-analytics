@@ -19,7 +19,7 @@ class Period
         return new static($startDate, $endDate);
     }
 
-    public static function days(int $numberOfDays)
+    public static function days($numberOfDays)
     {
         $endDate = Carbon::today();
 

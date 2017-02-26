@@ -49,7 +49,7 @@ class AnalyticsClient
      *
      * @return array|null
      */
-    public function performQuery(string $viewId, DateTime $startDate, DateTime $endDate, string $metrics, array $others = [])
+    public function performQuery($viewId, DateTime $startDate, DateTime $endDate, $metrics = null, array $others = [])
     {
         $cacheName = $this->determineCacheName(func_get_args());
 
